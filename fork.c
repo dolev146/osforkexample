@@ -1,6 +1,7 @@
-#include <iostream>
 #include <sys/wait.h> // for wait()
 #include <unistd.h>   // for fork()
+#include <stdio.h>
+#include <stdlib.h>
 
 int main()
 {
@@ -23,10 +24,11 @@ int main()
     else
     {
         // we are the child
-
-        execv("/bin/ls",NULL);
-        _exit(EXIT_FAILURE); // exec never returns
+        char *bin_path = "/bin/dir";
+        char *args[] = {bin_path , NULL};
+        execv(bin_path, args);
+        // _exit(EXIT_FAILURE); // exec never returns
     }
-    
+
     return 0;
 }
